@@ -10,7 +10,7 @@ import json
 import time
 from os.path import exists
 
-PATH = "chromedriver" #Download the chromedriver for your chromeversion and add the path to that 
+PATH = "chromedriver" #add path to  your chromedriver
 driver = webdriver.Chrome(PATH)
 
 driver.get("https://openscrobbler.com/")
@@ -18,25 +18,23 @@ driver.get("https://openscrobbler.com/")
 
 
 def readFile():
-    with open("Apple Music Library Tracks.json") as musicFile: #input path to your project folder and add this .json to the end
+    with open("Apple Music Library Tracks.json") as musicFile: #path to your Apple Music Library Tracks json
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
     print(arrayOfMusicData)
     arrayOfMusic = {}
     for i in arrayOfMusicData:
-        try:
+        if ("Eminem" in str(i["Artist"])) :
             title = i["Title"]
             arrayOfMusic[title] = {}
             arrayOfMusic[title]["Artist"] = i["Artist"]
             arrayOfMusic[title]["Album"] = i["Album"]
             arrayOfMusic[title]["Album Artist"] = i["Album Artist"]
             arrayOfMusic[title]["Track Play Count"] = i["Track Play Count"]
-        except:
-            continue
     return(arrayOfMusic)
 
 def readTestFile():
-    with open("test.json") as musicFile: #input path to your project folder and add test.json to the end
+    with open("test.json") as musicFile: #add the path to the folder you cloned this in and then add test.json
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
     #print(arrayOfMusicData)
@@ -50,13 +48,9 @@ def readTestFile():
             arrayOfMusic[title]["Album"] = arrayOfMusicData[str(i)]["Album"]
             arrayOfMusic[title]["Album Artist"] = arrayOfMusicData[str(i)]["Album Artist"]
             arrayOfMusic[title]["Track Play Count"] = arrayOfMusicData[str(i)]["Track Play Count"]
-        except:
-            print()
-        #except:
-        #    print()
     return(arrayOfMusic)
 
-if exists("test.json"): #input path to your project folder and add test.json to the end
+if exists("/home/garv/programming/scrobbler/test.json"):
     musicDict = readTestFile()
 else:
     musicDict = readFile()
@@ -71,10 +65,10 @@ try:
     time.sleep(1)
     username = driver.find_element_by_xpath(
         '/html/body/div[5]/div[2]/div[5]/div[2]/div/div/form/div[1]/div/input')
-    username.send_keys("") #enter user
+    username.send_keys("") #username or email
     passwordBox = driver.find_element_by_xpath(
         '/html/body/div[5]/div[2]/div[5]/div[2]/div/div/form/div[2]/div/input')
-    passwordBox.send_keys("") #Enter password
+    passwordBox.send_keys("") #password for lastfm
     passwordBox.send_keys(Keys.RETURN)
     driver.find_element_by_xpath(
         '/html/body/div[5]/div[2]/div[5]/div[3]/div/div/section/form/div/div/button').click()
@@ -84,6 +78,8 @@ try:
         scrobbleManually.click()
         for songGroup in musicDict:
             i = 0
+            #print(songGroup)
+            #time.sleep(10)
             lim = int(musicDict[songGroup]["Track Play Count"])
             while (i < lim):
                 print(lim)
@@ -100,6 +96,7 @@ try:
                 time.sleep(1)
                 i += 1
                 print(i)
+            print("here")
             removedMusic.append(songGroup)
         try:
             for removedSong in removedMusic:
