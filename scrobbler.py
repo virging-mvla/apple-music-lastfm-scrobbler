@@ -10,9 +10,8 @@ import json
 import time
 from os.path import exists
 
-PATH = "chromedriver" #add path to  your chromedriver
+PATH = "chromedriver" #add path to  your chromedriver.
 driver = webdriver.Chrome(PATH)
-
 driver.get("https://openscrobbler.com/")
 #time.sleep(10)
 
@@ -137,7 +136,7 @@ try:
         with open("test.json", "w") as output:
             #print(musicDict)
             json.dump(musicDict, output, indent=3)
-        time.sleep(500)
+        #time.sleep(500)
         driver.quit()
     time.sleep(10)
 except:
