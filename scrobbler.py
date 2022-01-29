@@ -24,13 +24,15 @@ def readFile():
     print(arrayOfMusicData)
     arrayOfMusic = {}
     for i in arrayOfMusicData:
-        if ("Eminem" in str(i["Artist"])) :
+        try:
             title = i["Title"]
             arrayOfMusic[title] = {}
             arrayOfMusic[title]["Artist"] = i["Artist"]
             arrayOfMusic[title]["Album"] = i["Album"]
             arrayOfMusic[title]["Album Artist"] = i["Album Artist"]
             arrayOfMusic[title]["Track Play Count"] = i["Track Play Count"]
+        except:
+            continue
     return(arrayOfMusic)
 
 def readTestFile():
@@ -48,9 +50,11 @@ def readTestFile():
             arrayOfMusic[title]["Album"] = arrayOfMusicData[str(i)]["Album"]
             arrayOfMusic[title]["Album Artist"] = arrayOfMusicData[str(i)]["Album Artist"]
             arrayOfMusic[title]["Track Play Count"] = arrayOfMusicData[str(i)]["Track Play Count"]
+        except:
+            continue
     return(arrayOfMusic)
 
-if exists("/home/garv/programming/scrobbler/test.json"):
+if exists("test.json"): #add the path to the folder you cloned this in and then add test.json
     musicDict = readTestFile()
 else:
     musicDict = readFile()
