@@ -6,6 +6,7 @@ Dependencies : (will make more in depth later)
 - Chrome >=v97 
 - Chrome Webdriver
 - Python > 3.9
+- pip3
 - Selenium (pip3 install selenium)
 
 Installation/Running Instructions: (I'm hoping to make this WAY shorter soon)
