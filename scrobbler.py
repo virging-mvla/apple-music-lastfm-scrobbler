@@ -10,7 +10,7 @@ import json
 import time
 from os.path import exists
 
-PATH = "/home/garv/chromedriver_linux64/chromedriver"
+PATH = "chromedriver" #Download the chromedriver for your chromeversion and add the path to that 
 driver = webdriver.Chrome(PATH)
 
 driver.get("https://openscrobbler.com/")
