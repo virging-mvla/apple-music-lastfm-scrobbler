@@ -6,6 +6,7 @@ Dependencies : (will make more in depth later)
 - Chrome >=v97 
 - Chrome Webdriver
 - Python > 3.9
+- pip3
 - Selenium (pip3 install selenium)
 
 Just download the dependencies and run the script. You're going to need the .json file
