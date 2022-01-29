@@ -1,6 +1,8 @@
 # tabScraper
 Program to input old apple music scrobbles into lastFM 
 
+NOTE: As of now, this is still a SCRIPT, not a proper application. As such, downloading and running it is a little messy and requires about 10 minutes. I hope the instructions below make sense, but if they don't, please reach out to me at virginkargarv@gmail.com
+
 Dependencies : (will make more in depth later) 
 
 - Chrome >=v97 
