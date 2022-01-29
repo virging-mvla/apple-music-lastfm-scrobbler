@@ -85,7 +85,13 @@ try:
             #print(songGroup)
             #time.sleep(10)
             lim = int(musicDict[songGroup]["Track Play Count"])
+            doneForDay = False
             while (i < lim):
+                if (len(driver.find_elements(By.XPATH, "/html/body/div/div/div/div/div/div")) > 0):
+                    print('error here')
+                    i -= 1
+                    doneForDay = True
+                    break
                 print(lim)
                 driver.find_element_by_xpath(
                         '/html/body/div/div/main/div/div[1]/form/div[1]/div[1]/input').send_keys(musicDict[songGroup]["Artist"])
@@ -97,11 +103,14 @@ try:
                         '/html/body/div/div/main/div/div[1]/form/div[4]/div/input').send_keys(musicDict[songGroup]["Album Artist"])
                 driver.find_element_by_xpath(
                         '/html/body/div/div/main/div/div[1]/form/button').click()
-                time.sleep(1)
+                #time.sleep(50)
                 i += 1
                 print(i)
             print("here")
-            removedMusic.append(songGroup)
+            if doneForDay == False:
+                removedMusic.append(songGroup)
+            else:
+                break
         try:
             for removedSong in removedMusic:
                 musicDict.pop(removedSong)
@@ -112,10 +121,14 @@ try:
         with open("test.json", "w") as output:
             #print(musicDict)
             json.dump(musicDict, output, indent=3)
+        print("done")
+        #time.sleep(500)
         driver.quit()
     except:
         print("failure on scrobble manually")
-        musicDict[songGroup]["Track Play Count"] = int(musicDict[songGroup]["Track Play Count"]) - i
+        #time.sleep(500)
+        musicDict[songGroup]["Track Play Count"] = int(
+            musicDict[songGroup]["Track Play Count"]) - i
         try:
             for removedSong in removedMusic:
                 musicDict.pop(removedSong)
@@ -124,6 +137,7 @@ try:
         with open("test.json", "w") as output:
             #print(musicDict)
             json.dump(musicDict, output, indent=3)
+        time.sleep(500)
         driver.quit()
     time.sleep(10)
 except:
