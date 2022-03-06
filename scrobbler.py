@@ -17,7 +17,7 @@ driver.get("https://openscrobbler.com/")
 
 
 def readFile():
-    with open("Apple Music Library Tracks.json") as musicFile: #path to your Apple Music Library Tracks json
+    with open("Apple Music Library Tracks.json", encoding="utf8") as musicFile: #path to your Apple Music Library Tracks json
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
     print(arrayOfMusicData)
@@ -35,7 +35,7 @@ def readFile():
     return(arrayOfMusic)
 
 def readTestFile():
-    with open("test.json") as musicFile: #add the path to the folder you cloned this in and then add test.json
+    with open("test.json", ecnoding="utf8") as musicFile: #add the path to the folder you cloned this in and then add test.json
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
     #print(arrayOfMusicData)
