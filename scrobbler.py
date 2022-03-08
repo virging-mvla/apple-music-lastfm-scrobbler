@@ -17,7 +17,7 @@ driver.get("https://openscrobbler.com/")
 
 
 def readFile():
-    with open("Apple Music Library Tracks.json", encoding="utf8") as musicFile: #path to your Apple Music Library Tracks json
+    with open("Apple Music Library Tracks.json", encoding="utf8") as musicFile:
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
     print(arrayOfMusicData)
@@ -35,10 +35,9 @@ def readFile():
     return(arrayOfMusic)
 
 def readTestFile():
-    with open("test.json", ecnoding="utf8") as musicFile: #add the path to the folder you cloned this in and then add test.json
+    with open("test.json", ecnoding="utf8") as musicFile:
         data = musicFile.read()
     arrayOfMusicData = json.loads(data)
-    #print(arrayOfMusicData)
     arrayOfMusic = {}
     for i in arrayOfMusicData:
         title = str(i)
@@ -53,7 +52,7 @@ def readTestFile():
             continue
     return(arrayOfMusic)
 
-if exists("test.json"): #add the path to the folder you cloned this in and then add test.json
+if exists("test.json"):
     musicDict = readTestFile()
 else:
     musicDict = readFile()
@@ -81,13 +80,11 @@ try:
         scrobbleManually.click()
         for songGroup in musicDict:
             i = 0
-            #print(songGroup)
-            #time.sleep(10)
             lim = int(musicDict[songGroup]["Track Play Count"])
             doneForDay = False
             while (i < lim):
                 if (len(driver.find_elements(By.XPATH, "/html/body/div/div/div/div/div/div")) > 0):
-                    print('error here')
+                    print('Done for Day')
                     i -= 1
                     doneForDay = True
                     break
@@ -102,10 +99,9 @@ try:
                         '/html/body/div/div/main/div/div[1]/form/div[4]/div/input').send_keys(musicDict[songGroup]["Album Artist"])
                 driver.find_element_by_xpath(
                         '/html/body/div/div/main/div/div[1]/form/button').click()
-                #time.sleep(50)
                 i += 1
                 print(i)
-            print("here")
+            print("Out of while loop for song")
             if doneForDay == False:
                 removedMusic.append(songGroup)
             else:
@@ -115,17 +111,14 @@ try:
                 musicDict.pop(removedSong)
             print(musicDict)
         except:
-            print("error here")
+            print("error popping song")
 
         with open("test.json", "w") as output:
-            #print(musicDict)
             json.dump(musicDict, output, indent=3)
         print("done")
-        #time.sleep(500)
         driver.quit()
     except:
         print("failure on scrobble manually")
-        #time.sleep(500)
         musicDict[songGroup]["Track Play Count"] = int(
             musicDict[songGroup]["Track Play Count"]) - i
         try:
@@ -134,11 +127,8 @@ try:
         except:
             print("failed in exception to add")
         with open("test.json", "w") as output:
-            #print(musicDict)
             json.dump(musicDict, output, indent=3)
-        #time.sleep(500)
         driver.quit()
-    time.sleep(10)
 except:
     print("failed")
     time.sleep(50)
