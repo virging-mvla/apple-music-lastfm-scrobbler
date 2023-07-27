@@ -1,9 +1,10 @@
 # tabScraper
 Program to input old apple music scrobbles into lastFM 
 
-NOTE: As of 4/5/22, this is still under development.
+NOTE: As of 7/27/2023, this project is no longer under active development. It should still work as intended.
 
-NOTE 2: As of now, this is still a SCRIPT, not a proper application. As such, downloading and running it is a little messy and requires about 10 minutes. I hope the instructions below make sense, but if they don't, please reach out to me at virginkargarv@gmail.com
+NOTE 2: As of now, this is still a SCRIPT, not a proper application. It is written entirely in one file with admittedly poor programming practices -- it was written in about fifteen minutes.
+As such, downloading and running it is a little messy and requires about 10 minutes. I hope the instructions below make sense, but if they don't, please reach out to me at virginkargarv@gmail.com
 
 Dependencies : (will make more in depth later) 
 
@@ -16,7 +17,7 @@ Dependencies : (will make more in depth later)
 Installation/Running Instructions: (I'm hoping to make this WAY shorter soon)
 1. Download the project using git clone.
 2. Move your Apple Music json file into the project folder.
-3. Download the chromedriver if you have not already. You can download it from https://chromedriver.chromium.org/downloads. You'll probably be using chrome version 97. Also download chrome if you don't have it.
+3. Download the chromedriver if you have not already. You can download it from https://chromedriver.chromium.org/downloads. Also download chrome if you don't have it.
 4. Download python if you don't have it. You can download it from https://www.python.org/downloads/.
 5. ONLY IF YOU GET A PIP-RELATED ERROR: Download pip from https://pip.pypa.io/en/stable/installation/
 6. Install selenium. To do this, open a terminal and run "pip3 install selenium".
